@@ -26,3 +26,36 @@ void tokenize_input(char *buffer, char *args[])
 	args[i] = NULL;
 }
 
+
+/**
+ * execute_command - Executes built-in commands or external programs entered by the user
+ *
+ * @args: array of command arguments
+ * @num_args: number of arguments
+ *
+ * Return: 0 if a built-in command was executed, 1 otherwise
+ */
+
+int execute_command(char *args[], int num_args)
+{
+	if (strcmp(args[0], "cd") == 0)
+	{
+		if (num_args == 2)
+		{
+			if (chdir(args[1]) != 0)
+			{
+				perror("chdir");
+			}
+	}
+	else
+	{
+		fprintf(stderr, "Usage: cd <directory>\n");
+	}
+	return (0);
+	}
+	else if (strcmp(args[0], "exit") == 0)
+	{
+		exit(EXIT_SUCCESS);
+	}
+	return (1);
+}
